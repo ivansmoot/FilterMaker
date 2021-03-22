@@ -307,6 +307,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-main/build
-main/dist
+python_scripts/main/build
+python_scripts/main/dist
 .idea
