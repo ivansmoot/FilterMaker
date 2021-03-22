@@ -1,10 +1,13 @@
 from PyQt5 import QtWidgets
-import os
+from pathlib import Path
+from python_scripts.data import filter_data
 
 
 def btn_click(self, index):
-    print(index)
-    file_name, file_type = QtWidgets.QFileDialog.getOpenFileName(self, "选取文件", os.getcwd(),
-                                                                 "All Files(*);;Text Files(*.txt)")
-    # print(file_name)
-    # print(file_type)
+    file_name, file_type = QtWidgets.QFileDialog.getOpenFileName(
+        self,
+        "选择图片",
+        str(Path.cwd()),
+        "Pics(*.png *.jpg *.jpeg *.acv)"
+    )
+    filter_data.pics_path[index] = file_name
