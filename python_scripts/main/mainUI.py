@@ -48,7 +48,7 @@ class MainUI(QWidget):
 
         pic_choose_btn_delete_one = QPushButton('-')
         # 把当前布局传给删除方法
-        pic_choose_btn_delete_one.clicked.connect(lambda: pic_delete_btn_click.btn_click(grid))
+        pic_choose_btn_delete_one.clicked.connect(lambda: pic_delete_btn_click.btn_click(self, grid))
 
         grid.addWidget(pic_choose_btn_delete_one, 0, 3)
 
