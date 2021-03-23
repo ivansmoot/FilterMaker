@@ -8,8 +8,10 @@ from python_scripts.funcs import pic_add_btn_click
 from python_scripts.funcs import confirm_btn_click
 from python_scripts.funcs import filter_name_text_changed
 from python_scripts.funcs import filter_id_text_changed
+from python_scripts.funcs import filter_blend_text_changed
 from python_scripts.utils import pics_in_base64
 from python_scripts.utils import pic2py
+from python_scripts.data import filter_data
 
 
 class MainUI(QWidget):
@@ -37,7 +39,7 @@ class MainUI(QWidget):
         filter_name_edit.textChanged.connect(lambda: filter_name_text_changed.text_changed(filter_name_edit))
         grid.addWidget(filter_name_edit, 0, 1)
 
-        # 创建按钮,绑定事件,设置位置
+        # 创建按钮,绑定事件,设置位置tt
         # 这里有个坑是按钮点击事件方法,在另一个文件里,要用lambda才行
         pic_choose_btn_add_one = QPushButton('+')
         pic_choose_btn_add_one.clicked.connect(lambda: pic_add_btn_click.btn_click(self, grid))
@@ -46,13 +48,14 @@ class MainUI(QWidget):
         pic_choose_btn_delete_one = QPushButton('-')
         grid.addWidget(pic_choose_btn_delete_one, 0, 3)
 
-        pic_choose_btn1 = QPushButton('选择一张图片')
-        pic_choose_btn1.clicked.connect(lambda: pic_choose_btn_click.btn_click(self, 0))
+        pic_choose_btn1 = QPushButton(filter_data.pic_choose_btn_name[0])
+        pic_choose_btn1.clicked.connect(lambda: pic_choose_btn_click.btn_click(self, 0, pic_choose_btn1))
         grid.addWidget(pic_choose_btn1, 1, 0)
 
         filter_choose_edit_combine_btn1 = QLineEdit()
         filter_choose_edit_combine_btn1.setMaxLength(20)
         filter_choose_edit_combine_btn1.setPlaceholderText('请输入混合模式')
+        filter_choose_edit_combine_btn1.textChanged.connect(lambda: filter_blend_text_changed.text_changed(filter_choose_edit_combine_btn1, 0))
         grid.addWidget(filter_choose_edit_combine_btn1, 1, 1)
 
         explain_filters_which_support = QPushButton()
