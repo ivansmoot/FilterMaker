@@ -9,6 +9,7 @@ from python_scripts.funcs import confirm_btn_click
 from python_scripts.funcs import filter_name_text_changed
 from python_scripts.funcs import filter_id_text_changed
 from python_scripts.funcs import filter_blend_text_changed
+from python_scripts.funcs import pic_delete_btn_click
 from python_scripts.utils import pics_in_base64
 from python_scripts.utils import pic2py
 from python_scripts.data import filter_data
@@ -46,6 +47,9 @@ class MainUI(QWidget):
         grid.addWidget(pic_choose_btn_add_one, 0, 2)
 
         pic_choose_btn_delete_one = QPushButton('-')
+        # 把当前布局传给删除方法
+        pic_choose_btn_delete_one.clicked.connect(lambda: pic_delete_btn_click.btn_click(grid))
+
         grid.addWidget(pic_choose_btn_delete_one, 0, 3)
 
         pic_choose_btn1 = QPushButton(filter_data.pic_choose_btn_name[0])
@@ -96,5 +100,5 @@ if __name__ == '__main__':
     # 设置在程序坞里的图标
     pic2py.get_pic(pics_in_base64.main, "main_decode_in_base64")
     app.setWindowIcon(QIcon("main_decode_in_base64"))
-    ex = MainUI()
+    MainUI()
     exit(app.exec_())
