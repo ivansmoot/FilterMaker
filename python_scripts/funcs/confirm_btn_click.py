@@ -1,15 +1,14 @@
 from PyQt5.QtWidgets import QMessageBox
 from python_scripts.utils import input_check
 from python_scripts.data import filter_data
+from python_scripts.utils import filter_data_maker
+from python_scripts.utils import filter_desc_maker
+from hashlib import md5
 
 
 def btn_click(self):
-    f_id = filter_data.filter_id
-    f_name = filter_data.filter_name
-    f_pics = filter_data.pics_path
-    f_blends_str = filter_data.blend_mods
     all_digit = True
-    for index, f_blend_str in enumerate(f_blends_str):
+    for index, f_blend_str in enumerate(filter_data.blend_mods):
         for each_blend_str in f_blend_str:
             if not each_blend_str.isdigit():
                 all_digit = False
@@ -20,12 +19,12 @@ def btn_click(self):
                             QMessageBox.Yes)
         return
 
-    for index, f_blend_str in enumerate(f_blends_str):
+    for index, f_blend_str in enumerate(filter_data.blend_mods):
         filter_data.blend_modes_num[index] = []
         for each_blend_str in f_blend_str:
             filter_data.blend_modes_num[index].append((int(each_blend_str)))
 
-    check_res = input_check.check(f_id, f_name, f_pics, filter_data.blend_modes_num)
+    check_res = input_check.check(filter_data.filter_id, filter_data.filter_name, filter_data.pics_path, filter_data.blend_modes_num)
     if check_res == -1:
         QMessageBox.warning(self, '',
                             '数据类型错误',
@@ -64,3 +63,10 @@ def btn_click(self):
                             QMessageBox.Yes)
     else:
         print('校验通过')
+        # 生成data文件
+        filter_data_maker.data_maker(filter_data.pics_path, filter_data.blend_modes_num)
+        # 生成md5
+        m5 = md5()
+        m5.update(filter_data.filter_data_content.encode('utf-8'))
+        # 生成desc文件
+        filter_desc_maker.desc_maker(filter_data.filter_id, filter_data.filter_name, m5.hexdigest())

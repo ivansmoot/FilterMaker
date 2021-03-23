@@ -7,7 +7,7 @@ def btn_click(self, index, btn):
     file_name, file_type = QtWidgets.QFileDialog.getOpenFileName(
         self,
         "选择图片",
-        str(Path.cwd()),
+        str(Path(filter_data.current_path)),
         "Pics(*.png *.jpg *.jpeg *.acv)"
     )
     filter_data.pics_path[index] = file_name

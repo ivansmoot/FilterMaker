@@ -1,4 +1,6 @@
 from json import dumps
+from python_scripts.data import filter_data
+from pathlib import Path
 
 
 def data_maker(pics, blends):
@@ -36,47 +38,6 @@ def data_maker(pics, blends):
             "res_path": pic
         })
 
-    # 动态生成filters结构
-    # 传三个参数,分别是这个滤镜是对哪张图片生效的,哪种blend效果,以及这是该效果里的第几个(因为一个效果可能被应用到多张图片上)
-    # TODO 这个方法要放到公共常量里去
-    def get_input_content(pic_id, blend_num, in_id):
-        content = {
-            1: {
-                "in_id": in_id,
-                "in_type": "uniform",
-                "in_data_name": "inputImageTexture2",
-                "in_data_value": "3",
-                "in_data_size": 1,
-                "in_data_type": "sample2D",
-                "in_source_type": 1,
-                "in_source_res_id": pic_id,
-                "in_source_filter_id": 0
-            },
-            18: {
-                "in_id": in_id,
-                "in_type": "uniform",
-                "in_data_name": "inputImageTexture2",
-                "in_data_value": "3",
-                "in_data_size": 1,
-                "in_data_type": "sample2D",
-                "in_source_type": 1,
-                "in_source_res_id": pic_id,
-                "in_source_filter_id": 0
-            },
-            21: {
-                "in_id": in_id,
-                "in_type": "uniform",
-                "in_data_name": "inputImageTexture2",
-                "in_data_value": "3",
-                "in_data_size": 1,
-                "in_data_type": "sample2D",
-                "in_source_type": 1,
-                "in_source_res_id": pic_id,
-                "in_source_filter_id": 0
-            }
-        }
-        return content.get(blend_num, None)
-
     # filter里面会有多种滤镜效果
     filter_id_num = 0
     for index, b2p in enumerate(from_blend_to_find_pic):
@@ -84,7 +45,7 @@ def data_maker(pics, blends):
             input_content = []
             in_id_num = 0
             for each_b2p in b2p:
-                input_content.append(get_input_content(each_b2p + 1, index + 1, in_id_num + 1))
+                input_content.append(filter_data.get_input_content(each_b2p + 1, index + 1, in_id_num + 1))
                 in_id_num += 1
             filters.append({
                 "filter_id": filter_id_num + 1,
@@ -104,9 +65,12 @@ def data_maker(pics, blends):
     filter_data_content = dumps(filter_data_dict, indent=4, separators=(',', ': '))
 
     # 存文件
-    f = open("template.data", "w")
+    f = open(Path(filter_data.current_path) / "template.data", "w")
     f.write(filter_data_content)
     f.close()
+
+    # 存公共变量
+    filter_data.filter_data_content = filter_data_content
 
 
 if __name__ == '__main__':
