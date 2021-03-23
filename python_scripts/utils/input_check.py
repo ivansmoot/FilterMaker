@@ -1,4 +1,5 @@
 from re import match
+from python_scripts.data import filter_data
 
 """
 check函数接受四个参数,分别是滤镜id,滤镜name,滤镜使用的图片,以及每张图片使用的blend
@@ -8,9 +9,8 @@ check函数接受四个参数,分别是滤镜id,滤镜name,滤镜使用的图片
 -2: id或name参数有空的情况
 -3: id不符合规则,需要是字母或下划线开头,后面可以有数字,第一位不能是数字
 -4: pics或blends给的不对,可能是空,或里面含空
--5: pics数量和blends数量没对应上
--6: pics里存在错误数据,如不支持格式的文件,或存在重复的文件
--7: blends里存在错误数据,如不支持的滤镜数字
+-5: pics里存在错误数据,如不支持格式的文件,或存在重复的文件
+-6: blends里存在错误数据,如不支持的滤镜数字
 """
 
 
@@ -41,23 +41,21 @@ def check(filter_id, filter_name, pics, blends):
                 if not isinstance(each_blend, int):
                     return -4
     if len(pics) != len(blends):
-        return -5
+        return -4
     # pics的每一项都必须是支持图片格式的结尾
     for pic in pics:
         pic_format = str(pic).split('.')[-1]
-        # TODO 这里支持的格式要写到公共常量里去
-        if pic_format not in ['png', 'jpeg', 'jpg', 'acv']:
-            return -6
+        if pic_format not in filter_data.support_pic_formats:
+            return -5
     # pics不能重复
     pics_set = set(pics)
     if len(pics_set) != len(pics):
-        return -6
+        return -5
     # blend的每一项的每个数字都需要是支持的滤镜格式
     for blend in blends:
         for each_blend in blend:
-            # TODO 这里支持的滤镜要写到公共常量里去
-            if each_blend not in [1, 18, 21]:
-                return -7
+            if each_blend not in filter_data.support_blend_formats:
+                return -6
     else:
         return 1
 

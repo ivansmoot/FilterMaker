@@ -80,7 +80,7 @@ class MainUI(QWidget):
         grid.addWidget(cancel_btn, 1, 3)
 
         confirm_btn = QPushButton('确定')
-        confirm_btn.clicked.connect(lambda: confirm_btn_click.btn_click())
+        confirm_btn.clicked.connect(lambda: confirm_btn_click.btn_click(self))
         grid.addWidget(confirm_btn, 1, 4)
 
         # 拿到屏幕的大小,算中心点,让这个窗口在屏幕中间,而不是写死一个值

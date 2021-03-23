@@ -33,4 +33,5 @@ def btn_click(self, grid):
     # 并且pics_path也增加一个空值,由于input_check也会检查空值,所以也没啥问题
     filter_data.pics_path.append('')
     # 这个也要加一个空
-    filter_data.blend_mods.append('')
+    filter_data.blend_mods.append([])
+    filter_data.blend_modes_num.append([])

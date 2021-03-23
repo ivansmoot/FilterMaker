@@ -27,7 +27,9 @@ def btn_click(self, grid):
     filter_data.pics_path.pop()
     filter_data.blend_mods.pop()
     filter_data.pic_choose_btn_name.pop()
+    filter_data.blend_modes_num.pop()
 
+    # 设置一个定时器,一直resize window,看上去真的很不优雅
     self.timer = QTimer(self)
     self.timer.timeout.connect(lambda: self.resize(self.sizeHint()))
     self.timer.start(1)
