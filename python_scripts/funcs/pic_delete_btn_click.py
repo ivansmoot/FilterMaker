@@ -9,14 +9,14 @@ def btn_click(self, grid):
         return
     # 删除最后的一个按钮和一个文本输入框
     # 先找到这个文本框
-    last_blend_edit = grid.itemAt(8 + (filter_data.total_row - 3) * 2).widget()
+    last_blend_edit = grid.itemAt(7 + (filter_data.total_row - 3) * 2).widget()
     # 删除方法
     # grid.removeWidget(last_blend_edit)
     # delete(last_blend_edit)
     last_blend_edit.deleteLater()
 
     # 找到按钮
-    last_pic_button = grid.itemAt(7 + (filter_data.total_row - 3) * 2).widget()
+    last_pic_button = grid.itemAt(6 + (filter_data.total_row - 3) * 2).widget()
     # 删除
     # grid.removeWidget(last_pic_button)
     # delete(last_pic_button)

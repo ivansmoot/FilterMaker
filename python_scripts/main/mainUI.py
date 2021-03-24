@@ -1,7 +1,6 @@
 from sys import argv, exit
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QGridLayout, QDesktopWidget
-from PyQt5.QtCore import QCoreApplication
 from python_scripts.funcs import pic_choose_btn_click
 from python_scripts.funcs import question_mark_btn_click
 from python_scripts.funcs import pic_add_btn_click
@@ -59,7 +58,8 @@ class MainUI(QWidget):
         filter_choose_edit_combine_btn1 = QLineEdit()
         filter_choose_edit_combine_btn1.setMaxLength(20)
         filter_choose_edit_combine_btn1.setPlaceholderText('请输入混合模式')
-        filter_choose_edit_combine_btn1.textChanged.connect(lambda: filter_blend_text_changed.text_changed(filter_choose_edit_combine_btn1, 0))
+        filter_choose_edit_combine_btn1.textChanged.connect(
+            lambda: filter_blend_text_changed.text_changed(filter_choose_edit_combine_btn1, 0))
         grid.addWidget(filter_choose_edit_combine_btn1, 1, 1)
 
         explain_filters_which_support = QPushButton()
@@ -74,14 +74,15 @@ class MainUI(QWidget):
         explain_filters_which_support.clicked.connect(lambda: question_mark_btn_click.btn_click(self))
         grid.addWidget(explain_filters_which_support, 1, 2)
 
-        cancel_btn = QPushButton('取消')
-        # 设置该按钮的点击事件为关闭窗口
-        cancel_btn.clicked.connect(QCoreApplication.instance().quit)
-        grid.addWidget(cancel_btn, 1, 3)
+        # 先去掉取消按钮
+        # cancel_btn = QPushButton('取消')
+        # # 设置该按钮的点击事件为关闭窗口
+        # cancel_btn.clicked.connect(QCoreApplication.instance().quit)
+        # grid.addWidget(cancel_btn, 1, 3)
 
         confirm_btn = QPushButton('确定')
         confirm_btn.clicked.connect(lambda: confirm_btn_click.btn_click(self))
-        grid.addWidget(confirm_btn, 1, 4)
+        grid.addWidget(confirm_btn, 1, 3)
 
         # 拿到屏幕的大小,算中心点,让这个窗口在屏幕中间,而不是写死一个值
         # 但是目前看上去有点歪了,具体原因待排查

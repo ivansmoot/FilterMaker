@@ -63,7 +63,7 @@ def data_maker(pics, blends):
     }
 
     # 根据dict生成一个JSON,indent代表四个空格来格式化separators是指用逗号和冒号空格来隔开,主要是为了冒号后面那个空格,看起来好看点
-    filter_data_content = dumps(filter_data_dict, indent=4, separators=(',', ': '))
+    filter_data_content = dumps(filter_data_dict,ensure_ascii=False, indent=4, separators=(',', ': '))
 
     # 存文件
     f = open(Path(filter_data.current_path) / "template.data", "w")
