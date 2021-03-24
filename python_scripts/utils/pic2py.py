@@ -3,7 +3,7 @@ import base64
 
 # 将图片转成base64,存在一个文件里
 # 之所以搞这么麻烦而不是直接用图片,是因为pyinstaller不能把图片打到执行文件里,只能搞出个文件来
-def pic2py(pictures_path, py_name):
+def pic_to_py(pictures_path, py_name):
     write_data = []
     for picture_path in pictures_path:
         # 每张图的存放格式是 图片名 = ""
@@ -22,8 +22,6 @@ def pic2py(pictures_path, py_name):
 
 
 # 读取某个base64的图片
-# 会在调用该方法的py文件目录下,生成一个名字叫pic_name的文件
-# 该文件可直接当图片文件使用
 def get_pic(pic_code, pic_name):
     image = open(pic_name, 'wb')
     image.write(base64.b64decode(pic_code))
@@ -32,4 +30,4 @@ def get_pic(pic_code, pic_name):
 
 if __name__ == '__main__':
     pics = ["../../res/images/questionMark.png", "../../res/images/main.icns"]
-    pic2py(pics, 'pics_in_base64')  # 将pics里面的图片写到 memory_pic.py 中
+    pic_to_py(pics, 'pics_in_base64')  # 将pics里面的图片写到 memory_pic.py 中

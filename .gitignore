@@ -311,4 +311,6 @@ python_scripts/main/build
 python_scripts/main/dist
 python_scripts/main/Pipfile
 python_scripts/main/Pipfile.lock
+python_scripts/main/.main_decode_in_base64
+python_scripts/main/.question_mark_decode_in_base64
 .idea

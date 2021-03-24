@@ -53,7 +53,8 @@ def folder_to_zip(source_folder):
     # 压缩包名称
     zip_name = str(source_folder).split('/')[-1] + '.tpl'
     # 生成一个ZipFile
-    zip_file = ZipFile(zip_name, 'w', ZIP_DEFLATED)
+    # 这里一定要注意ZipFile的路径,不然打包后可能生成在错误的位置
+    zip_file = ZipFile(Path(filter_data.current_path, zip_name), 'w', ZIP_DEFLATED)
     # os的walk方法真香
     for base_path, dirs, files in walk(source_folder):
         # 这里的inner_path是指这个文件/文件夹,相对于被压缩的最外面的文件夹的路径,而不是相对于根目录,这个很重要
@@ -62,9 +63,9 @@ def folder_to_zip(source_folder):
             inner_path += sep
         # 文件夹也要单独加一下,不然空文件夹就没了
         for each_dir in dirs:
-            zip_file.write(path.join(base_path, each_dir), inner_path + each_dir)
+            zip_file.write(Path(base_path, each_dir), inner_path + each_dir)
         for each_file in files:
             # 隐藏文件就算了,mac真的垃圾
             if not match(each_file, r'^\..*$'):
-                zip_file.write(path.join(base_path, each_file), inner_path + each_file)
+                zip_file.write(Path(base_path, each_file), inner_path + each_file)
     zip_file.close()
