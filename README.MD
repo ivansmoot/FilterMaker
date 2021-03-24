@@ -39,7 +39,7 @@ get_python_library_path里
 这张图由于有点大,在小图标的情况下不显示,这个问题就先不解决了  
   
 喜大普奔,windows尝试新版本的PyInstaller和Pyqt5,没报错,也不需要修改venv的文件  
-垃圾MAC
+垃圾MAC  
 pyinstaller 4.2  
 PyQt5 5.15.4
 Python仍然是3.7.6,下次用新版本Python再试一下
