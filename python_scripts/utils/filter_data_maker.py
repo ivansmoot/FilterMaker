@@ -31,11 +31,12 @@ def data_maker(pics, blends):
             res_type = 'acv'
         else:
             res_type = 'drawable'
+        res_path = 'image/' + str(pic).split('/')[-1]
         resources.append({
             "res_id": index + 1,
             "res_type": res_type,
             "res_name": str(pic).split('/')[-1],
-            "res_path": pic
+            "res_path": res_path
         })
 
     # filter里面会有多种滤镜效果
