@@ -25,7 +25,8 @@ def btn_click(self):
         for each_blend_str in f_blend_str:
             filter_data.blend_modes_num[index].append((int(each_blend_str)))
 
-    check_res = input_check.check(filter_data.filter_id, filter_data.filter_name, filter_data.pics_path, filter_data.blend_modes_num)
+    check_res = input_check.check(filter_data.filter_id, filter_data.filter_name, filter_data.pics_path,
+                                  filter_data.blend_modes_num)
     if check_res == -1:
         QMessageBox.warning(self, '',
                             '数据类型错误',
@@ -63,7 +64,6 @@ def btn_click(self):
                             '发生预期以外错误',
                             QMessageBox.Yes)
     else:
-        print('校验通过')
         # 生成data文件
         filter_data_maker.data_maker(filter_data.pics_path, filter_data.blend_modes_num)
         # 生成md5
@@ -71,4 +71,9 @@ def btn_click(self):
         m5.update(filter_data.filter_data_content.encode('utf-8'))
         # 生成desc文件
         filter_desc_maker.desc_maker(filter_data.filter_id, filter_data.filter_name, m5.hexdigest())
+        # 生成滤镜文件
         get_tpl_file.create_file(filter_data.pics_path, filter_data.filter_id)
+        # 最后给个toast
+        QMessageBox.information(self, '',
+                                '生成成功',
+                                QMessageBox.Yes)
