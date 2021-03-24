@@ -19,10 +19,3 @@ def desc_maker(filter_id, filter_name, filter_data_md5):
     f = open(Path(filter_data.current_path) / "template.desc", "w")
     f.write(filter_desc_content)
     f.close()
-
-
-if __name__ == '__main__':
-    filter1_id = 'cold1'
-    filter1_name = 'cold1_winter'
-    filter1_data_md5 = 'e023a82238e0d3321a705b1b9023814e'
-    desc_maker(filter1_id, filter1_name, filter1_data_md5)

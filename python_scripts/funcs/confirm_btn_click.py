@@ -3,6 +3,7 @@ from python_scripts.utils import input_check
 from python_scripts.data import filter_data
 from python_scripts.utils import filter_data_maker
 from python_scripts.utils import filter_desc_maker
+from python_scripts.utils import get_tpl_file
 from hashlib import md5
 
 
@@ -70,3 +71,4 @@ def btn_click(self):
         m5.update(filter_data.filter_data_content.encode('utf-8'))
         # 生成desc文件
         filter_desc_maker.desc_maker(filter_data.filter_id, filter_data.filter_name, m5.hexdigest())
+        get_tpl_file.create_file(filter_data.pics_path, filter_data.filter_id)

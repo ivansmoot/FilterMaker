@@ -71,9 +71,3 @@ def data_maker(pics, blends):
 
     # 存公共变量
     filter_data.filter_data_content = filter_data_content
-
-
-if __name__ == '__main__':
-    pic_list = ['/user/bin/pic1.png', '/user/images/pic2.jpeg', './pic3.acv']
-    blends_list = [[1], [1, 18, 21], [18, 21]]
-    data_maker(pic_list, blends_list)
