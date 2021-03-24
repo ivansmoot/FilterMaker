@@ -64,9 +64,9 @@ class MainUI(QWidget):
 
         explain_filters_which_support = QPushButton()
         # 通过base64读出一张图
-        pic2py.get_pic(pics_in_base64.questionMark, 'question_mark_decode_in_base64')
+        pic2py.get_pic(pics_in_base64.questionMark, '.question_mark_decode_in_base64')
         # 设置该按钮的icon
-        explain_filters_which_support.setIcon(QIcon("question_mark_decode_in_base64"))
+        explain_filters_which_support.setIcon(QIcon(".question_mark_decode_in_base64"))
         # 设置按钮无边框，不然很难看
         explain_filters_which_support.setStyleSheet("border:none;")
         # 让按钮居左一点，离文本框近一点
@@ -98,7 +98,7 @@ class MainUI(QWidget):
 if __name__ == '__main__':
     app = QApplication(argv)
     # 设置在程序坞里的图标
-    pic2py.get_pic(pics_in_base64.main, "main_decode_in_base64")
-    app.setWindowIcon(QIcon("main_decode_in_base64"))
+    pic2py.get_pic(pics_in_base64.main, ".main_decode_in_base64")
+    app.setWindowIcon(QIcon(".main_decode_in_base64"))
     MainUI()
     exit(app.exec_())
