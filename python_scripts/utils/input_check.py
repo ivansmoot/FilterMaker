@@ -36,6 +36,8 @@ def check(filter_id, filter_name, pics, blends):
     for blend in blends:
         if not (isinstance(blend, list)):
             return -4
+        if not blend:
+            return -4
         else:
             for each_blend in blend:
                 if not isinstance(each_blend, int):

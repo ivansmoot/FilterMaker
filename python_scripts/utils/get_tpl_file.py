@@ -1,7 +1,7 @@
 from pathlib import Path
 from shutil import rmtree
 from zipfile import ZipFile, ZIP_DEFLATED
-from os import path, sep, walk
+from os import sep, walk
 from python_scripts.data import filter_data
 from shutil import copyfile
 from re import match
@@ -52,6 +52,8 @@ def create_file(pics, filter_id):
 def folder_to_zip(source_folder):
     # 压缩包名称
     zip_name = str(source_folder).split('/')[-1] + '.tpl'
+    # 需要一个外面的文件夹,否则缺少最外层的文件夹,导致滤镜不可用
+    base_dir = str(source_folder).split('/')[-1] + '/'
     # 生成一个ZipFile
     # 这里一定要注意ZipFile的路径,不然打包后可能生成在错误的位置
     zip_file = ZipFile(Path(filter_data.current_path, zip_name), 'w', ZIP_DEFLATED)
@@ -63,9 +65,9 @@ def folder_to_zip(source_folder):
             inner_path += sep
         # 文件夹也要单独加一下,不然空文件夹就没了
         for each_dir in dirs:
-            zip_file.write(Path(base_path, each_dir), inner_path + each_dir)
+            zip_file.write(Path(base_path, each_dir), base_dir + inner_path + each_dir)
         for each_file in files:
             # 隐藏文件就算了,mac真的垃圾
             if not match(each_file, r'^\..*$'):
-                zip_file.write(Path(base_path, each_file), inner_path + each_file)
+                zip_file.write(Path(base_path, each_file), base_dir + inner_path + each_file)
     zip_file.close()
