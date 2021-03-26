@@ -42,4 +42,5 @@ get_python_library_path里
 垃圾MAC  
 pyinstaller 4.2  
 PyQt5 5.15.4
-Python仍然是3.7.6,下次用新版本Python再试一下
+Python仍然是3.7.6,下次用新版本Python再试一下  
+亲测Python3.9.2好使,无敌了

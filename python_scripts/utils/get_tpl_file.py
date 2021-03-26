@@ -51,9 +51,9 @@ def create_file(pics, filter_id):
 
 def folder_to_zip(source_folder):
     # 压缩包名称
-    zip_name = str(source_folder).split('/')[-1] + '.tpl'
+    zip_name = str(source_folder).split(sep)[-1] + '.tpl'
     # 需要一个外面的文件夹,否则缺少最外层的文件夹,导致滤镜不可用
-    base_dir = str(source_folder).split('/')[-1] + '/'
+    base_dir = str(source_folder).split(sep)[-1] + sep
     # 生成一个ZipFile
     # 这里一定要注意ZipFile的路径,不然打包后可能生成在错误的位置
     zip_file = ZipFile(Path(filter_data.current_path, zip_name), 'w', ZIP_DEFLATED)
